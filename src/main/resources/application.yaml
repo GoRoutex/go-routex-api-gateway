@@ -1,0 +1,98 @@
+spring:
+  application:
+    name: go-routex-api-gateway
+
+
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          httpclient:
+            connect-timeout: 10000
+            response-timeout: 60s
+          forwarded:
+            enabled: true
+          x-forwarded:
+            enabled: true
+          default-filters:
+            - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin Vary
+            - PreserveHostHeader
+          globalcors:
+            add-to-simple-url-handler-mapping: true
+            cors-configurations:
+              '[/**]':
+                allowedOriginPatterns:
+                  - "http://localhost:*"
+                  - "http://127.0.0.1:*"
+                allowedMethods:
+                  - GET
+                  - POST
+                  - PUT
+                  - PATCH
+                  - DELETE
+                  - OPTIONS
+                allowedHeaders: "*"
+                exposedHeaders:
+                  - Authorization
+                  - Content-Disposition
+                  - Location
+                  - X-Request-Id
+                allowCredentials: true
+                maxAge: 3600
+          routes:
+            - id: user-service
+              uri: ${app.services.user-service-uri:http://localhost:8081}
+              predicates:
+                - Path=/api/v1/user-service/**
+
+            - id: management-service-core
+              uri: ${app.services.management-service-uri:http://localhost:8082}
+              predicates:
+                - Path=/api/v1/management/**
+
+            - id: merchant-platform
+              uri: ${app.services.user-merchant-uri:http://localhost:8083}
+              predicates:
+                - Path=/api/v1/merchant-service/**
+
+            - id: booking-service
+              uri: ${app.services.booking-service-uri:http://localhost:8084}
+              predicates:
+                - Path=/api/v1/booking-service/**
+
+            - id: payment-service
+              uri: ${app.services.payment-service-uri:http://localhost:8086}
+              predicates:
+                - Path=/api/v1/payment-service/**
+
+            - id: driver-service
+              uri: ${app.services.driver-service-uri:http://localhost:8087}
+              predicates:
+                - Path=/api/v1/driver-service/**,/api/v1/trip-passengers/**
+server:
+  port: ${SERVER_PORT:8080}
+  forward-headers-strategy: framework
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always
+    gateway:
+      access: unrestricted
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+
+info:
+  app:
+    name: ${spring.application.name}
+    description: API gateway for Go Routex frontend traffic
