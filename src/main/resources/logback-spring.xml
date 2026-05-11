@@ -1,0 +1,13 @@
+<!-- logback-spring.xml -->
+<configuration>
+    <property name="LOG_PATTERN"
+              value="%d{ISO8601} %t %level [%X{trace_id}] %msg - %logger%n%throwable"/>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>
