@@ -1,0 +1,7 @@
+vn/com/routex/hub/api/gateway/config/ApplicationConfig$1.class
+vn/com/routex/hub/api/gateway/config/SessionConfig.class
+vn/com/routex/hub/api/gateway/filter/BffAuthFilter$2.class
+vn/com/routex/hub/api/gateway/filter/BffAuthFilter$1.class
+vn/com/routex/hub/api/gateway/RoutexApiGatewayApplication.class
+vn/com/routex/hub/api/gateway/config/ApplicationConfig.class
+vn/com/routex/hub/api/gateway/filter/BffAuthFilter.class

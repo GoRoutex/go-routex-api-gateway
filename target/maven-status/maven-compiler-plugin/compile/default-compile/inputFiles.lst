@@ -1,1 +1,4 @@
 /Volumes/Dev/Workspace/GoRoutex/go-routex-api-gateway/src/main/java/vn/com/routex/hub/api/gateway/RoutexApiGatewayApplication.java
+/Volumes/Dev/Workspace/GoRoutex/go-routex-api-gateway/src/main/java/vn/com/routex/hub/api/gateway/config/ApplicationConfig.java
+/Volumes/Dev/Workspace/GoRoutex/go-routex-api-gateway/src/main/java/vn/com/routex/hub/api/gateway/config/SessionConfig.java
+/Volumes/Dev/Workspace/GoRoutex/go-routex-api-gateway/src/main/java/vn/com/routex/hub/api/gateway/filter/BffAuthFilter.java
