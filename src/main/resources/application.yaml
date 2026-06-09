@@ -9,8 +9,6 @@ spring:
       port: ${REDIS_PORT:6379}
       password: ${REDIS_PASSWORD:}
 
-
-
   cloud:
     gateway:
       server:
@@ -53,35 +51,30 @@ spring:
               predicates:
                 - Path=/api/v1/user-service/**
 
-            - id: management-service-core
-              uri: ${app.services.management-service-uri:http://localhost:8082}
+            - id: user-service-management
+              uri: ${app.services.user-service-uri:http://localhost:8081}
               predicates:
-                - Path=/api/v1/management/**
+                - Path=/api/v1/management/user-service/**
+
+            - id: platform-core
+              uri: ${app.services.platform-core-uri:http://localhost:8082}
+              predicates:
+                - Path=/api/v1/management/**,/api/v1/merchant-service/**,/api/v1/booking-service/**,/api/v1/payment-service/**,/api/v1/driver-service/**,/api/v1/trip-passengers/**,/api/recent-activities/**
 
             - id: analytics-processor
-              uri: ${app.services.analytics-processor-uri:http://localhost:8088}
+              uri: ${app.services.analytics-processor-uri:http://localhost:8083}
               predicates:
                 - Path=/api/v1/analytics-service/**
 
-            - id: merchant-platform
-              uri: ${app.services.user-merchant-uri:http://localhost:8083}
+            - id: notify-processor
+              uri: ${app.services.notify-processor-uri:http://localhost:8085}
               predicates:
-                - Path=/api/v1/merchant-service/**
+                - Path=/api/v1/notify/**
 
-            - id: booking-service
-              uri: ${app.services.booking-service-uri:http://localhost:8084}
+            - id: artifact-intelligence-service
+              uri: ${app.services.artifact-intelligence-service-uri:http://localhost:8000}
               predicates:
-                - Path=/api/v1/booking-service/**
-
-            - id: payment-service
-              uri: ${app.services.payment-service-uri:http://localhost:8086}
-              predicates:
-                - Path=/api/v1/payment-service/**
-
-            - id: driver-service
-              uri: ${app.services.driver-service-uri:http://localhost:8087}
-              predicates:
-                - Path=/api/v1/driver-service/**,/api/v1/trip-passengers/**
+                - Path=/api/v1/ai/**
 server:
   port: ${SERVER_PORT:8080}
   forward-headers-strategy: framework

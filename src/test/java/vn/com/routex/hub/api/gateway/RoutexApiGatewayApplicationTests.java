@@ -28,11 +28,17 @@ class RoutexApiGatewayApplicationTests {
 
         assertEquals(6, routes.size());
         assertTrue(hasRoute(routes, "user-service", "/api/v1/user-service/**"));
-        assertTrue(hasRoute(routes, "management-service-core", "/api/v1/management/**"));
-        assertTrue(hasRoute(routes, "merchant-platform", "/api/v1/merchant-service/**"));
-        assertTrue(hasRoute(routes, "booking-service", "/api/v1/booking-service/**"));
-        assertTrue(hasRoute(routes, "payment-service", "/api/v1/payment-service/**"));
-        assertTrue(hasRoute(routes, "driver-service", "/api/v1/driver-service/**"));
+        assertTrue(hasRoute(routes, "user-service-management", "/api/v1/management/user-service/**"));
+        assertTrue(hasRoute(routes, "platform-core", "/api/v1/management/**"));
+        assertTrue(hasRoute(routes, "platform-core", "/api/v1/merchant-service/**"));
+        assertTrue(hasRoute(routes, "platform-core", "/api/v1/booking-service/**"));
+        assertTrue(hasRoute(routes, "platform-core", "/api/v1/payment-service/**"));
+        assertTrue(hasRoute(routes, "platform-core", "/api/v1/driver-service/**"));
+        assertTrue(hasRoute(routes, "platform-core", "/api/v1/trip-passengers/**"));
+        assertTrue(hasRoute(routes, "platform-core", "/api/recent-activities/**"));
+        assertTrue(hasRoute(routes, "analytics-processor", "/api/v1/analytics-service/**"));
+        assertTrue(hasRoute(routes, "notify-processor", "/api/v1/notify/**"));
+        assertTrue(hasRoute(routes, "artifact-intelligence-service", "/api/v1/ai/**"));
     }
 
     @Test
