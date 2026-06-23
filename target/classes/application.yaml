@@ -43,6 +43,7 @@ spring:
                   - Content-Disposition
                   - Location
                   - X-Request-Id
+                  - RT-REQUEST-ID
                 allowCredentials: true
                 maxAge: 3600
           routes:

@@ -120,16 +120,6 @@ public class BffAuthFilter implements WebFilter, Ordered {
             });
     }
 
-    private boolean isPublicPath(String path) {
-        return path.contains("/internal/") ||
-               path.contains("/provinces/search") ||
-               path.contains("/campaigns/validate") ||
-               path.contains("/swagger") ||
-               path.contains("/v3/api-docs") ||
-               path.contains("/actuator") ||
-               path.contains("/error");
-    }
-
     private Mono<Void> handleWebLogin(ServerWebExchange exchange, WebFilterChain chain) {
         ServerHttpResponse originalResponse = exchange.getResponse();
         DataBufferFactory bufferFactory = originalResponse.bufferFactory();
