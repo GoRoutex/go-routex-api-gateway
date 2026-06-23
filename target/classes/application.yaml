@@ -30,6 +30,7 @@ spring:
                 allowedOriginPatterns:
                   - "http://localhost:*"
                   - "http://127.0.0.1:*"
+                  - "https://routex-go.com"
                 allowedMethods:
                   - GET
                   - POST
@@ -105,4 +106,6 @@ info:
 
 app:
   security:
-    cookie-domain: ${COOKIE_DOMAIN:localhost}
+    cookie-domain: ${COOKIE_DOMAIN:routex-go.com}
+    cookie-secure: ${COOKIE_SECURE:true}
+    cookie-same-site: ${COOKIE_SAME_SITE:None}

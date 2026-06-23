@@ -1,0 +1,51 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  data:
+    redis:
+      host: ${REDIS_HOST:redis}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: user-service
+              uri: ${app.services.user-service-uri:http://go-routex-user-service:8081}
+              predicates:
+                - Path=/api/v1/user-service/**
+
+            - id: user-service-management
+              uri: ${app.services.user-service-uri:http://go-routex-user-service:8081}
+              predicates:
+                - Path=/api/v1/management/user-service/**
+
+            - id: platform-core
+              uri: ${app.services.platform-core-uri:http://go-routex-platform-core:8080}
+              predicates:
+                - Path=/api/v1/management/**,/api/v1/merchant-service/**,/api/v1/booking-service/**,/api/v1/payment-service/**,/api/v1/driver-service/**,/api/v1/trip-passengers/**,/api/recent-activities/**
+
+            - id: analytics-processor
+              uri: ${app.services.analytics-processor-uri:http://go-routex-analytics-processor:8083}
+              predicates:
+                - Path=/api/v1/analytics-service/**
+
+            - id: notify-processor
+              uri: ${app.services.notify-processor-uri:http://go-routex-notify-processor:8085}
+              predicates:
+                - Path=/api/v1/notify/**
+
+            - id: artifact-intelligence-service
+              uri: ${app.services.artifact-intelligence-service-uri:http://artifact-intelligence-service:8084}
+              predicates:
+                - Path=/api/v1/ai/**
+
+app:
+  security:
+    cookie-domain: ${COOKIE_DOMAIN:routex-go.com}
+    cookie-secure: ${COOKIE_SECURE:true}
+    cookie-same-site: ${COOKIE_SAME_SITE:None}

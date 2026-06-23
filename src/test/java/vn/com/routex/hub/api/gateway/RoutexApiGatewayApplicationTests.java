@@ -47,6 +47,7 @@ class RoutexApiGatewayApplicationTests {
 
         assertTrue(corsConfiguration.getAllowedOriginPatterns().contains("http://localhost:*"));
         assertTrue(corsConfiguration.getAllowedOriginPatterns().contains("http://127.0.0.1:*"));
+        assertTrue(corsConfiguration.getAllowedOriginPatterns().contains("https://routex-go.com"));
         assertTrue(corsConfiguration.getAllowedMethods().contains("OPTIONS"));
         assertTrue(Boolean.TRUE.equals(corsConfiguration.getAllowCredentials()));
     }

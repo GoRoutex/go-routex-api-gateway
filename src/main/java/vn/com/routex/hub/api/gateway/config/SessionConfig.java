@@ -15,6 +15,12 @@ public class SessionConfig {
     @Value("${app.security.cookie-domain:localhost}")
     private String cookieDomain;
 
+    @Value("${app.security.cookie-secure:true}")
+    private boolean cookieSecure;
+
+    @Value("${app.security.cookie-same-site:None}")
+    private String cookieSameSite;
+
     @Bean
     public RedisSerializer<Object> springSessionDefaultRedisSerializer() {
         return RedisSerializer.json();
@@ -30,8 +36,8 @@ public class SessionConfig {
             
             if (!"localhost".equalsIgnoreCase(cookieDomain) && !"127.0.0.1".equals(cookieDomain) && !cookieDomain.isBlank()) {
                 builder.domain(cookieDomain)
-                       .secure(true) // Require HTTPS for production subdomains
-                       .sameSite("Lax");
+                       .secure(cookieSecure)
+                       .sameSite(cookieSameSite);
             } else {
                 builder.secure(false) // Allow HTTP for localhost development
                        .sameSite("Lax");
