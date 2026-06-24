@@ -31,6 +31,7 @@ spring:
                   - "http://localhost:*"
                   - "http://127.0.0.1:*"
                   - "https://routex-go.com"
+                  - "https://www.routex-go.com"
                 allowedMethods:
                   - GET
                   - POST

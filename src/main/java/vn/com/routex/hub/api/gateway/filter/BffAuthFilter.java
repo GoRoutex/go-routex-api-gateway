@@ -62,6 +62,10 @@ public class BffAuthFilter implements WebFilter, Ordered {
         String clientType = request.getHeaders().getFirst(CLIENT_TYPE_HEADER);
         boolean isWeb = CLIENT_TYPE_WEB.equalsIgnoreCase(clientType);
 
+        if (HttpMethod.OPTIONS.equals(request.getMethod())) {
+            return chain.filter(exchange);
+        }
+
         if (!isWeb) {
             // Mobile or other client: check if request has session cookie anyway to relay token
             return exchange.getSession()
